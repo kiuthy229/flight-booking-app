@@ -8,10 +8,10 @@ const {
   PORT,
   HOST,
   HOST_URL,
-  SQL_USER,
-  SQL_PASSWORD,
-  SQL_DATABASE,
-  SQL_SERVER,
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DATABASE,
+  POSTGRES_SERVER,
 } = process.env;
 
 const sqlEncrypt = process.env.ENCRYPT === "true";
@@ -24,10 +24,10 @@ module.exports = {
   host: HOST,
   url: HOST_URL,
   sql: {
-    server: SQL_SERVER,
-    database: SQL_DATABASE,
-    user: SQL_USER,
-    password: SQL_PASSWORD,
+    server: POSTGRES_SERVER,
+    database: POSTGRES_DATABASE,
+    user: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
     options: {
         encrypt:sqlEncrypt,
         enableArithAbort:true
