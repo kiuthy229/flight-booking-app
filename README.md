@@ -1,10 +1,24 @@
+## Features
+
+  * Create a ticket to transport ticketing system
+  * Get a ticket by Id
+  * Get all ticket booking history of a user in the system
+
+## Quick Start
+
 First step: 
+```console
 $ npm install
+```
 or
+```console
 $ yarn add
+```
 
 Start script: 
+```console
 $ nodemon index.js
+```
 
 -->Server will start at PORT 8080
 
