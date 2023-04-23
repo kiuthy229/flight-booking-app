@@ -13,12 +13,12 @@ const loadSqlSeries = async (folderName) => {
     const query = await fs.readFileSync(join(filePath, sqlFile), {
       encoding: "UTF-8",
     });
-    queries[(sqlFiles.replace(".sql"), "")] = query;
+    queries[sqlFiles.replace(".sql", "")] = query;
   }
 
-  return queries
+  return queries;
 };
 
 module.exports = {
-    loadSqlSeries
-}
+  loadSqlSeries,
+};
