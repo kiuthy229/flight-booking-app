@@ -2,8 +2,6 @@
 
 const client = require("../connection.js");
 
-client.connect();
-
 const getTickets = async (_, res) => {
   try {
     client.query(`Select * from tickets`, (err, result) => {
@@ -33,7 +31,6 @@ const getTicketById = async (req, res) => {
 
 const createTicket = async (req, res) => {
   const ticket = req.body;
-  console.log(ticket);
   let insertQuery = `Insert into tickets(
     ticket_id, transport_no, departure_date, origin, arrival_date, destination, stops, passenger_type, total_price, user_id)
     values (${ticket.ticket_id}, '${ticket.transport_no}', '${ticket.departure_date}', '${ticket.origin}', '${ticket.arrival_date}', '${ticket.destination}', ${ticket.stops}, '${ticket.passenger_type}', ${ticket.total_price}, ${ticket.user_id})`;
