@@ -8,7 +8,13 @@ const ticketController = require("./controllers/ticketController");
 const userController = require("./controllers/userController");
 
 const { getTickets, getTicketById, createTicket } = ticketController;
-const { getUsers, getUserById, createUser, updateUserPassword } = userController;
+const {
+  getUsers,
+  getUserById,
+  createUser,
+  loginToUserAccount,
+  updateUserPassword,
+} = userController;
 
 const app = express();
 
@@ -30,5 +36,7 @@ app.get("/users", getUsers);
 app.get("/user/:id", getUserById);
 
 app.post("/users", createUser);
+
+app.get("/users/login", loginToUserAccount);
 
 app.put("/user/:id", updateUserPassword);

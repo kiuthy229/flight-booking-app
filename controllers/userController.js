@@ -26,6 +26,14 @@ const createUser = async (req, res) => {
   }
 };
 
+const loginToUserAccount = async (req, res) => {
+  try {
+    await userData.loginToUserAccount(req, res);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 const updateUserPassword = async (req, res) => {
   try {
     await userData.updateUserPassword(req, res);
@@ -38,5 +46,6 @@ module.exports = {
   getUsers,
   getUserById,
   createUser,
+  loginToUserAccount,
   updateUserPassword,
 };
