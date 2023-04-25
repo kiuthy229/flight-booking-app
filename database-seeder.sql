@@ -68,5 +68,5 @@ VALUES
         '01-01-2001',
         '0912345678',
         'tnmk@gmail.com',
-        'secret'
+        '$2b$10$UdVOmisNfrYpU9wqe0I61eQUQzHco4JxSwudMrjjaHV8gmM63nBqO'
     );
