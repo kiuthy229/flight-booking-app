@@ -6,32 +6,34 @@
 
 ## Quick Start
 
-First step:
+1. Firstly, you should add some dependencies to the app:
 
-```console
+```shell
+$ cd server
 $ npm install
 ```
 
 or
 
-```console
-$ yarn add
+```shell
+$ cd server
+$ yarn
 ```
 
-Start script:
+2. Start script in `server`:
 
-```console
+```shell
 $ nodemon index.js
 ```
 
 Have your Docker Desktop installed then:
 
-```console
+```shell
 $ docker build .
 $ docker-compose up --build
 ```
 
--->Server will start at PORT 8080
+--> Server will start at PORT 8080
 
 Get all tickets: http://localhost:8080/tickets
 Get ticket with id 1: http://localhost:8080/ticket/1
