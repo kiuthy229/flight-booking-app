@@ -20,7 +20,7 @@ $ cd server
 $ yarn
 ```
 
-2. Start script in `server`:
+2. Start script in `/server` folder:
 
 ```shell
 $ nodemon index.js
@@ -34,6 +34,18 @@ $ docker-compose up --build
 ```
 
 --> Server will start at PORT 8080
+
+3. Start client side under the `/client` folder:
+
+```shell
+$ yarn start
+```
+
+or
+
+```shell
+$ npm start
+```
 
 Get all tickets: http://localhost:8080/tickets
 Get ticket with id 1: http://localhost:8080/ticket/1
