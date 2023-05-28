@@ -6,6 +6,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const ticketController = require("./controllers/ticketController");
 const userController = require("./controllers/userController");
+const { buyTicket } = require("./data/tickets");
 
 const { getTickets, getTicketById, createTicket } = ticketController;
 const {
@@ -30,6 +31,8 @@ app.get("/tickets", getTickets);
 app.get("/ticket/:id", getTicketById);
 
 app.post("/tickets", createTicket);
+
+app.put("/ticket/:id", buyTicket);
 
 app.get("/users", getUsers);
 

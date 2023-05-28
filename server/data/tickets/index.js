@@ -66,8 +66,29 @@ const createTicket = async (req, res) => {
   }
 };
 
+const buyTicket = async (req, res) => {
+  const { ticket_id, user_id } = req.body;
+
+  let updateQuery = `update tickets 
+  set user_id = '${user_id}' 
+  where ticket_id=${ticket_id}`;
+
+  try {
+    client.query(updateQuery, (err) => {
+      if (!err) {
+        res.send(
+          JSON.stringify({ success: "buy ticket successfully", status: 200 })
+        );
+      }
+    });
+  } catch (error) {
+    return error.message;
+  }
+};
+
 module.exports = {
   getTickets,
   getTicketById,
   createTicket,
+  buyTicket,
 };

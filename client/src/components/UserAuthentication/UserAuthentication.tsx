@@ -1,8 +1,8 @@
 import { Fragment, FunctionComponent } from 'react'
 
-interface RegisterFormProps {}
+interface UserAuthenticationProps {}
 
-const RegisterForm: FunctionComponent<RegisterFormProps> = () => {
+const UserAuthentication: FunctionComponent<UserAuthenticationProps> = () => {
   return (
     <Fragment>
       <div className="row">
@@ -24,7 +24,7 @@ const RegisterForm: FunctionComponent<RegisterFormProps> = () => {
                   data-qa="decrement-counter"
                   onClick={() => console.log('authen')}
                 >
-                  Register
+                  Confirm
                 </button>
               </div>
             </div>
@@ -35,4 +35,4 @@ const RegisterForm: FunctionComponent<RegisterFormProps> = () => {
   )
 }
 
-export default RegisterForm
+export default UserAuthentication

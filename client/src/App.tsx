@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar/Navbar'
 import { About } from './pages/About'
 import { Home } from './pages/Home'
 import LoginForm from './components/LoginForm/LoginForm'
+import RegisterForm from './components/RegisterForm/RegisterForm'
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/login" element={<RegisterForm />} />
         </Routes>
       </div>
     </BrowserRouter>

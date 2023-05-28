@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-import { actionTypes } from '../../features/counter'
+import { actionTypes } from '../../store'
 import Counter from './Counter'
 
 describe('Counter', () => {

@@ -1,6 +1,6 @@
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './actionTypes'
 import counterReducer from './counterReducer'
-import { CounterActionTypes } from './types'
+import { CounterActionTypes } from '../../types/types'
 
 describe('features > counter > counterReducer', () => {
   test(`increments value, if ${INCREMENT_COUNTER} action is provided`, () => {

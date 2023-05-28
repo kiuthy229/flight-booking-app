@@ -26,8 +26,17 @@ const createTicket = async (req, res) => {
   }
 };
 
+const buyTicket = async (req, res) => {
+  try {
+    await ticketData.buyTicket(req, res);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   getTickets,
   getTicketById,
   createTicket,
+  buyTicket
 };

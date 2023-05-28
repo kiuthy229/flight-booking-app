@@ -1,11 +1,13 @@
 import { Fragment, FunctionComponent, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface LoginFormProps {}
 
 const LoginForm: FunctionComponent<LoginFormProps> = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   async function Login() {
     return axios
@@ -13,8 +15,11 @@ const LoginForm: FunctionComponent<LoginFormProps> = () => {
         email: email,
         password: password,
       })
-      .then(function (response: any) {
-        console.log(response)
+      .then(function ({ data }: any) {
+        console.log(data?.user_id)
+        // axios get user by id
+        // navigate to user with that id home page
+        navigate('/session-timed-out')
       })
       .catch(function (error: any) {
         console.log(error)
