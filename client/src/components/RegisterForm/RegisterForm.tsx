@@ -1,5 +1,5 @@
-import { Fragment, FunctionComponent, useState } from 'react'
 import axios from 'axios'
+import { Fragment, FunctionComponent, useState } from 'react'
 
 interface RegisterFormProps {}
 

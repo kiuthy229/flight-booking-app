@@ -23,7 +23,7 @@
       "files": ["*.ts", "*.tsx"],
       "parserOptions": {
         "ecmaVersion": 12,
-        "project": ["./client/tsconfig.json"]
+        "project": ["./tsconfig.json"]
       }
     }
   ]

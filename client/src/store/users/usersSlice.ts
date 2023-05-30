@@ -4,14 +4,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { UserDetails } from '../../types/types'
 
-const initialState: UserDetails = {
-  user_id: 0,
-  username: '',
-  full_name: '',
-  date_of_birth: '',
-  phone_number: 0,
-  email: '',
-  password: '',
+const initialState = {
+  user: null,
 }
 
 export const usersSlice = createSlice({
@@ -19,7 +13,7 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<UserDetails>) => {
-      return action.payload
+      return Object.assign({}, state, { user: action.payload })
     },
   },
 })
@@ -28,3 +22,5 @@ export const usersSlice = createSlice({
 export const { setUser } = usersSlice.actions
 
 export const usersReducer = usersSlice.reducer
+
+export const isAuthSelector = (state: any) => state.users.user !== null

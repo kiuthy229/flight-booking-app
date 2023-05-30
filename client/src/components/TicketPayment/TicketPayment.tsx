@@ -1,9 +1,8 @@
 import { Fragment, FunctionComponent } from 'react'
 
-interface BuyTicketProps {}
+interface TicketPaymentProps {}
 
-const BuyTicket: FunctionComponent<BuyTicketProps> = () => {
-
+const TicketPayment: FunctionComponent<TicketPaymentProps> = () => {
   return (
     <Fragment>
       <div className="row">
@@ -37,4 +36,4 @@ const BuyTicket: FunctionComponent<BuyTicketProps> = () => {
   )
 }
 
-export default BuyTicket
+export default TicketPayment

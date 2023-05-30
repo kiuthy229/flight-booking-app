@@ -1,7 +1,10 @@
 "use strict";
 
+const JWT = require("jsonwebtoken");
 const client = require("../connection.js");
 const Encrypt = require("../../utils/encrypt.js");
+
+let refreshTokens = [];
 
 const getUsers = async (_, res) => {
   try {
@@ -52,11 +55,20 @@ const createUser = async (req, res) => {
                 '${hashPassword}')`;
 
   try {
-    client.query(insertQuery, (err) => {
+    client.query(insertQuery, async (err) => {
       if (!err) {
+        const accessToken = await JWT.sign(
+          { email },
+          process.env.ACCESS_TOKEN_SECRET,
+          {
+            expiresIn: "1m",
+          }
+        );
+
         res.send(
           JSON.stringify({
             success: "Create new user successfully",
+            accessToken: accessToken,
             status: 200,
           })
         );
@@ -84,7 +96,32 @@ const loginToUserAccount = async (req, res) => {
             );
 
             if (isPasswordMatched) {
-              res.send(user);
+              // Send JWT access token
+              const accessToken = await JWT.sign(
+                { email },
+                process.env.ACCESS_TOKEN_SECRET,
+                {
+                  expiresIn: "1m",
+                }
+              );
+
+              // Refresh token
+              const refreshToken = await JWT.sign(
+                { email },
+                process.env.REFRESH_TOKEN_SECRET,
+                {
+                  expiresIn: "5m",
+                }
+              );
+
+              // Set refersh token in refreshTokens array
+              refreshTokens.push(refreshToken);
+
+              res.send({
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+                user: user,
+              });
             } else {
               res.send({ message: "Password is incorrect" });
             }

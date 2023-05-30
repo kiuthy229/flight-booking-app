@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { isAuthSelector } from '../store/users/usersSlice'
 
 export const About: React.FC = () => {
   const navigate = useNavigate()
+  const isAuth = useSelector(isAuthSelector)
 
-  return (
+  return isAuth ? (
     <Fragment>
       <h1>About</h1>
       <p>
@@ -14,10 +17,12 @@ export const About: React.FC = () => {
         type="button"
         className="btn"
         cy-data="go-back-button"
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/tickets')}
       >
-        Go back
+        Browse tickets
       </button>
     </Fragment>
+  ) : (
+    <Navigate to="/login" />
   )
 }

@@ -1,6 +1,8 @@
-import { Fragment, FunctionComponent, useState } from 'react'
 import axios from 'axios'
+import { Fragment, FunctionComponent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { setUser } from '../../store/users/usersSlice'
+import { useDispatch } from 'react-redux'
 
 interface LoginFormProps {}
 
@@ -8,18 +10,21 @@ const LoginForm: FunctionComponent<LoginFormProps> = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  async function Login() {
+  async function login() {
     return axios
       .post('http://localhost:8080/users/login', {
         email: email,
         password: password,
       })
-      .then(function ({ data }: any) {
-        console.log(data?.user_id)
-        // axios get user by id
-        // navigate to user with that id home page
-        navigate('/session-timed-out')
+      .then(function (response: any) {
+        if (response.data.accessToken) {
+          localStorage.setItem('user', JSON.stringify(response.data))
+        }
+        navigate('/about')
+        dispatch(setUser(response.data))
+        return response.data
       })
       .catch(function (error: any) {
         console.log(error)
@@ -54,7 +59,7 @@ const LoginForm: FunctionComponent<LoginFormProps> = () => {
                   className="waves-effect waves-teal btn-flat green"
                   type="button"
                   data-qa="decrement-counter"
-                  onClick={() => Login()}
+                  onClick={() => login()}
                 >
                   Log in
                 </button>

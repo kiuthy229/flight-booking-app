@@ -1,11 +1,11 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LoginForm from './components/LoginForm/LoginForm'
+import TicketList from './components/TicketList/TicketList'
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar/Navbar'
 import { About } from './pages/About'
 import { Home } from './pages/Home'
-import LoginForm from './components/LoginForm/LoginForm'
-import RegisterForm from './components/RegisterForm/RegisterForm'
 
 const App: React.FC = () => {
   return (
@@ -15,8 +15,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/tickets" element={<TicketList />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/login" element={<RegisterForm />} />
         </Routes>
       </div>
     </BrowserRouter>
