@@ -1,3 +1,5 @@
+//
+import { Box, Button, Card, TextField } from '@mui/material'
 import { Fragment, FunctionComponent } from 'react'
 
 interface TicketPaymentProps {}
@@ -5,33 +7,83 @@ interface TicketPaymentProps {}
 const TicketPayment: FunctionComponent<TicketPaymentProps> = () => {
   return (
     <Fragment>
-      <div className="row">
-        <div className="col s12 m6">
-          <div className="card ">
-            <div className="card-content">
-              <span className="card-title">Log In</span>
-            </div>
-            <div className="card-action">
-              <div className="group">
-                <input type="text" placeholder="Username or email" />
-              </div>
-              <div className="group">
-                <input type="password" placeholder="Password" />
-              </div>
-              <div className="group">
-                <button
-                  className="waves-effect waves-teal btn-flat green"
-                  type="button"
-                  data-qa="decrement-counter"
-                  onClick={() => console.log('login')}
-                >
-                  Log in
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card>
+        <Box
+          sx={{
+            display: 'flex',
+          }}
+        >
+          <TextField
+            required
+            id="outlined-required"
+            label={'Name'}
+            defaultValue={''}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+          }}
+        >
+          <TextField
+            required
+            id="outlined-required"
+            label={'Date of birth'}
+            defaultValue={''}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+          }}
+        >
+          <TextField
+            required
+            id="outlined-required"
+            label={'Credit card'}
+            defaultValue={''}
+          />
+
+          <TextField
+            required
+            id="outlined-required"
+            label={'Expire date'}
+            defaultValue={''}
+          />
+
+          <TextField
+            required
+            id="outlined-required"
+            label={'CVV'}
+            defaultValue={''}
+          />
+        </Box>
+
+        <Box>
+          <TextField
+            required
+            id="outlined-required"
+            label={'Mobile number'}
+            defaultValue={''}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label={'Email'}
+            defaultValue={''}
+          />
+        </Box>
+
+        <Button
+          variant="contained"
+          sx={{ maxHeight: 40, minWidth: 100, fontWeight: 600 }}
+          onClick={() => console.log('login')}
+        >
+          Confirm Payment
+        </Button>
+      </Card>
     </Fragment>
   )
 }

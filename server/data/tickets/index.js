@@ -40,9 +40,10 @@ const createTicket = async (req, res) => {
     passenger_type,
     total_price,
     user_id,
+    airline,
   } = req.body;
   let insertQuery = `Insert into tickets(
-    ticket_id, transport_no, departure_date, origin, arrival_date, destination, stops, passenger_type, total_price, user_id)
+    ticket_id, transport_no, departure_date, origin, arrival_date, destination, stops, passenger_type, total_price, user_id, airline)
     values (${Math.floor(Math.random() * 10000)}, 
             '${transport_no}',
             '${departure_date}',
@@ -52,7 +53,8 @@ const createTicket = async (req, res) => {
             ${stops},
             '${passenger_type}',
             ${total_price},
-            ${user_id})`;
+            ${user_id},
+            ${airline})`;
   try {
     client.query(insertQuery, (err) => {
       if (!err) {

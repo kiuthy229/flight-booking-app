@@ -8,7 +8,8 @@ CREATE TABLE tickets (
     stops integer NOT NULL,
     passenger_type text NOT NULL,
     total_price integer NOT NULL,
-    user_id integer NOT NULL,
+    user_id integer,
+    airline text,
     CONSTRAINT tickets_pkey PRIMARY KEY (ticket_id)
 );
 
@@ -34,7 +35,8 @@ INSERT INTO
         stops,
         passenger_type,
         total_price,
-        user_id
+        user_id,
+        airline
     )
 VALUES
     (
@@ -47,7 +49,7 @@ VALUES
         0,
         'adult',
         3000000,
-        123456
+        null
     );
 
 INSERT INTO

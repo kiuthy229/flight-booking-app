@@ -1,29 +1,16 @@
 import axios from 'axios'
 import authHeader from '../../services/header'
-import Barcode from './Barcode'
 
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Box, Card, CardContent, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Typography } from '@mui/material'
 import { ConnectingAirports } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { isAuthSelector } from '../../store/users/usersSlice'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { TicketDetails } from '../ReviewTicket/ReviewTicket'
 
 interface TicketDetailsProps {}
-
-interface TicketDetails {
-  ticket_id: number
-  transport_no: string
-  departure_date: string
-  origin: string
-  arrival_date: string
-  destination: string
-  stops: number
-  passenger_type: string
-  total_price: number
-  user_id: number
-}
 
 const TicketList: FunctionComponent<TicketDetailsProps> = () => {
   const [tickets, setTickets] = useState<TicketDetails[]>([])
@@ -54,99 +41,101 @@ const TicketList: FunctionComponent<TicketDetailsProps> = () => {
     <>
       {tickets ? (
         tickets.map((ticket) => (
-          <Card
-            sx={{
-              display: 'flex',
-              maxWidth: 800,
-              minHeight: 250,
-              alignContent: 'center',
-              alignItems: 'center',
-              margin: 3,
-            }}
-            key={ticket.ticket_id}
-            onClick={() => navigate('/ticket-payment')}
-          >
-            <Barcode value={ticket.ticket_id + '' + ticket.user_id} />
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <Box
+          <Card sx={{ margin: 3 }} key={ticket.ticket_id}>
+            <Typography variant="h4" color="text.primary" component="h1">
+              {ticket.airline}
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                minHeight: 180,
+                alignContent: 'center',
+                alignItems: 'center',
+              }}
+              key={ticket.ticket_id}
+              onClick={() => navigate('/ticket-payment')}
+            >
+              <CardContent
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  pl: 1,
-                  pb: 1,
+                  justifyContent: 'flex-end',
                 }}
               >
-                <Typography variant="h3" gutterBottom>
-                  {ticket.origin}
-                </Typography>
-                <ConnectingAirports sx={{ fontSize: 40, marginBottom: 2 }} />
-                <Typography variant="h3" gutterBottom>
-                  {ticket.destination}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  gap: 5,
-                }}
-              >
-                <Box>
-                  <Typography component="div" variant="h5">
-                    Passenger
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
                   >
-                    {ticket.user_id}
-                  </Typography>
-                </Box>
+                    <Box>
+                      <Typography variant="h5" gutterBottom>
+                        {ticket.departure_date}
+                      </Typography>
+                      <Typography variant="h5" gutterBottom>
+                        {ticket.origin}
+                      </Typography>
+                    </Box>
+                    <ConnectingAirports
+                      sx={{ fontSize: 40, marginBottom: 2 }}
+                    />
+                    <Box>
+                      <Typography variant="h5" gutterBottom>
+                        {ticket.arrival_date}
+                      </Typography>
+                      <Typography variant="h5" gutterBottom>
+                        {ticket.destination}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      gap: 5,
+                    }}
+                  >
+                    <Typography variant="h5" gutterBottom>
+                      Duration:{' '}
+                      {Number(ticket.arrival_date) -
+                        Number(ticket.departure_date)}
+                    </Typography>
 
-                <Box>
-                  <Typography component="div" variant="h5">
-                    Gate
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    {ticket.transport_no}
-                  </Typography>
+                    <Typography variant="h5" gutterBottom>
+                      Transits:
+                      {ticket.stops}
+                    </Typography>
+                  </Box>
                 </Box>
-
-                <Box>
-                  <Typography component="div" variant="h5">
-                    Departure
-                  </Typography>
+                <Box sx={{ justifyContent: 'flex-end' }} marginLeft={5}>
                   <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
+                    variant="h5"
+                    component="h5"
+                    sx={{ fontWeight: 600, color: '#e1a20f' }}
                   >
-                    {ticket.departure_date}
+                    {ticket.total_price} VND
+                    <span style={{ fontWeight: 600, color: '#9d9d9d' }}>
+                      {' /pax'}
+                    </span>
                   </Typography>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      maxHeight: 40,
+                      minWidth: 200,
+                      fontWeight: 600,
+                      fontSize: 16,
+                    }}
+                    onClick={() => console.log('login')}
+                  >
+                    Choose ticket
+                  </Button>
                 </Box>
-              </Box>
+              </CardContent>
             </Box>
-            <CardContent>
-              <Box sx={{ justifyContent: 'center' }} marginLeft={5}>
-                <Typography component="div" variant="h2">
-                  {ticket.ticket_id}
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  color="text.secondary"
-                  component="h4"
-                >
-                  {ticket.transport_no}
-                </Typography>
-              </Box>
-            </CardContent>
           </Card>
         ))
       ) : (
