@@ -9,10 +9,10 @@ import { isAuthSelector } from '../../store/users/usersSlice'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { TicketDetails } from '../ReviewTicket/ReviewTicket'
+import { LogoContainer } from '../LogoMap/LogoMap'
+import { formatNumberWithCommas } from '../../utils/formatNumberWithCommas'
 
-interface TicketDetailsProps {}
-
-const TicketList: FunctionComponent<TicketDetailsProps> = () => {
+const TicketList: FunctionComponent = () => {
   const [tickets, setTickets] = useState<TicketDetails[]>([])
   const isAuth = useSelector(isAuthSelector)
   const navigate = useNavigate()
@@ -43,99 +43,85 @@ const TicketList: FunctionComponent<TicketDetailsProps> = () => {
         tickets.map((ticket) => (
           <Card sx={{ margin: 3 }} key={ticket.ticket_id}>
             <Typography variant="h4" color="text.primary" component="h1">
-              {ticket.airline}
+              <LogoContainer airline={ticket.airline} />
             </Typography>
-            <Box
+            <CardContent
               sx={{
                 display: 'flex',
-                minHeight: 180,
-                alignContent: 'center',
                 alignItems: 'center',
               }}
-              key={ticket.ticket_id}
-              onClick={() => navigate('/ticket-payment')}
             >
-              <CardContent
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                }}
-              >
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Box>
-                      <Typography variant="h5" gutterBottom>
-                        {ticket.departure_date}
-                      </Typography>
-                      <Typography variant="h5" gutterBottom>
-                        {ticket.origin}
-                      </Typography>
-                    </Box>
-                    <ConnectingAirports
-                      sx={{ fontSize: 40, marginBottom: 2 }}
-                    />
-                    <Box>
-                      <Typography variant="h5" gutterBottom>
-                        {ticket.arrival_date}
-                      </Typography>
-                      <Typography variant="h5" gutterBottom>
-                        {ticket.destination}
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      gap: 5,
-                    }}
-                  >
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Box>
                     <Typography variant="h5" gutterBottom>
-                      Duration:{' '}
-                      {Number(ticket.arrival_date) -
-                        Number(ticket.departure_date)}
+                      {ticket.departure_date}
                     </Typography>
-
                     <Typography variant="h5" gutterBottom>
-                      Transits:
-                      {ticket.stops}
+                      {ticket.origin}
+                    </Typography>
+                  </Box>
+                  <ConnectingAirports sx={{ fontSize: 40, marginBottom: 2 }} />
+                  <Box>
+                    <Typography variant="h5" gutterBottom>
+                      {ticket.arrival_date}
+                    </Typography>
+                    <Typography variant="h5" gutterBottom>
+                      {ticket.destination}
                     </Typography>
                   </Box>
                 </Box>
-                <Box sx={{ justifyContent: 'flex-end' }} marginLeft={5}>
-                  <Typography
-                    variant="h5"
-                    component="h5"
-                    sx={{ fontWeight: 600, color: '#e1a20f' }}
-                  >
-                    {ticket.total_price} VND
-                    <span style={{ fontWeight: 600, color: '#9d9d9d' }}>
-                      {' /pax'}
-                    </span>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    gap: 5,
+                  }}
+                >
+                  <Typography variant="h5" gutterBottom>
+                    Duration:{' '}
+                    {Number(ticket.arrival_date) -
+                      Number(ticket.departure_date)}
                   </Typography>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      maxHeight: 40,
-                      minWidth: 200,
-                      fontWeight: 600,
-                      fontSize: 16,
-                    }}
-                    onClick={() => console.log('login')}
-                  >
-                    Choose ticket
-                  </Button>
+
+                  <Typography variant="h5" gutterBottom>
+                    Transits:
+                    {ticket.stops}
+                  </Typography>
                 </Box>
-              </CardContent>
-            </Box>
+              </Box>
+              <Box sx={{ justifyContent: 'flex-end' }} marginLeft={5}>
+                <Typography
+                  variant="h5"
+                  component="h5"
+                  sx={{ fontWeight: 600, color: '#e1a20f' }}
+                >
+                  {formatNumberWithCommas(ticket.total_price)} VND
+                  <span style={{ fontWeight: 600, color: '#9d9d9d' }}>
+                    {' /pax'}
+                  </span>
+                </Typography>
+                <Button
+                  variant="contained"
+                  sx={{
+                    maxHeight: 40,
+                    minWidth: 200,
+                    fontWeight: 600,
+                    fontSize: 16,
+                  }}
+                  onClick={() => navigate('/ticket-payment')}
+                >
+                  Choose ticket
+                </Button>
+              </Box>
+            </CardContent>
           </Card>
         ))
       ) : (
