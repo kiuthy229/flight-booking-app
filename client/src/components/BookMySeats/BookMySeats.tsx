@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Seats from '../Seats/Seats'
 
-const createSeats = (rows, startIndex) => {
+const createSeats = (rows: number, startIndex: string) => {
   let i = 0
-  let j = startIndex
+  let j = Number(startIndex)
   let k = 'A'
   const section = []
   while (i < 6 && j <= rows) {
@@ -30,11 +30,11 @@ const BookMySeats = () => {
     '10A',
     '10B',
   ])
-  const [bookedSeats, setBookedSeats] = useState([])
-  const [bookedStatus, setBookedStatus] = useState('')
-  const addSeat = (ev) => {
+  const [bookedSeats, setBookedSeats] = useState<string[]>([])
+  const [bookedStatus, setBookedStatus] = useState<string>('')
+  const addSeat = (ev: ChangeEvent<HTMLInputElement>) => {
     if (numberOfSeats && !ev.target.className.includes('disabled')) {
-      const seatsToBook = parseInt(numberOfSeats, 10)
+      const seatsToBook = parseInt(String(numberOfSeats), 10)
       if (bookedSeats.length <= seatsToBook) {
         if (bookedSeats.includes(ev.target.innerText)) {
           const newAvailable = bookedSeats.filter(
@@ -72,7 +72,8 @@ const BookMySeats = () => {
       <p>How many seats would you like to book?</p>
       <input
         value={numberOfSeats}
-        onChange={(ev) => setNumberOfSeats(ev.target.value)}
+        type="number"
+        onChange={(ev) => setNumberOfSeats(Number(ev.target.value))}
       />
       <Seats
         values={premiumSeats}

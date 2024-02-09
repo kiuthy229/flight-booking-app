@@ -1,7 +1,14 @@
-const Seats = (props) => {
+type SeatsType = {
+  values: string[]
+  availableSeats?: string[]
+  bookedSeats?: string[]
+  addSeat?: Function
+}
+
+const Seats: React.FC<SeatsType> = ({ values }) => {
   return (
     <div>
-      {props.values.map((seat) => {
+      {values.map((seat) => {
         return <div key={seat}>{seat}</div>
       })}
     </div>
