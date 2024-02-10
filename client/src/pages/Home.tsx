@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import TicketPayment from '../components/TicketPayment/TicketPayment'
 
 import TicketList from '../components/TicketList/TicketList'
+import { LP_HEADER } from '../shared/constants/common'
 
 export const Home: React.FC = () => {
   // const ticket: TicketDetails = {
@@ -19,7 +20,7 @@ export const Home: React.FC = () => {
   // }
   return (
     <Fragment>
-      Landing page
+      {LP_HEADER}
       <TicketPayment />
       <TicketList />
     </Fragment>

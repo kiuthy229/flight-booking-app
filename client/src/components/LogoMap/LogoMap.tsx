@@ -1,4 +1,4 @@
-import { Airlines } from '../common/common'
+import { Airlines } from '../../shared/constants/enums'
 
 type LogoData = {
   airline: string
