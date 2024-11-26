@@ -9,21 +9,14 @@
 1. Firstly, you should add some dependencies to the app:
 
 ```shell
-$ cd server
-$ npm install
-```
-
-or
-
-```shell
-$ cd server
+$ cd backend
 $ yarn
 ```
 
-2. Start script in `/server` folder:
+1. Start script in `/backend` folder:
 
 ```shell
-$ nodemon index.js
+$ yarn start
 ```
 
 Have your Docker Desktop installed then:
@@ -35,16 +28,10 @@ $ docker-compose up --build
 
 --> Server will start at PORT 8080
 
-3. Start client side under the `/client` folder:
+3. Start client side under the `/frontend` folder:
 
 ```shell
 $ yarn start
-```
-
-or
-
-```shell
-$ npm start
 ```
 
 Get all tickets: http://localhost:8080/tickets
