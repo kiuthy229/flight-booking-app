@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Island+Moments&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 body {
   margin: 0;
   justify-content: center;
@@ -21,4 +24,84 @@ code {
 .group {
   display: flex;
   justify-content: space-between;
+}
+
+:root {
+  --heading-color: #ffb347; /* Warm peachy-orange */
+  --primary-color: #ffe18d;
+  --secondary-color: #ffad94; /* Soft peach – ideal for buttons and accents */
+  --text-color: #5e5247; /* Warm gray – gentle and readable */
+  --font-name: 'Montserrat', sans-serif;
+  --subtitle-font-name: 'Island Moments', cursive;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  padding: 50px 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+ul {
+  list-style: none;
+}
+
+.primary__btn {
+  background: var(--secondary-color) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 0.4rem 1.5rem !important;
+}
+
+.primary__btn a {
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #fff;
+}
+.primary__btn a:hover {
+  color: inherit;
+}
+.secondary__btn {
+  background: transparent !important;
+  color: #0b2727 !important;
+  border: none !important;
+  font-weight: 500 !important;
+}
+
+.secondary__btn a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: var(--heading-color);
+}
+
+.secondary__btn a:hover {
+  color: inherit;
+}
+
+.section__subtitle {
+  color: var(--secondary-color) !important;
+  width: max-content;
+  padding: 0.5rem 0rem;
+
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--heading-color);
 }
