@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// filepath: /Users/thynguyen/Desktop/projects/flight-booking-app/backend/prisma/schema.prisma
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model users {
+  user_id       Int       @id @default(autoincrement())
+  username      String
+  full_name     String
+  date_of_birth DateTime
+  phone_number  String
+  email         String
+  password      String
+  bookings      bookings[]
+  tickets       tickets[]
+}
+
+model flights {
+  flight_id          Int       @id @default(autoincrement())
+  flight_number      String
+  departure_time     DateTime
+  departure_location String
+  arrival_time       DateTime
+  arrival_location   String
+  airline_id         Int
+  airline            airlines  @relation(fields: [airline_id], references: [airline_id])
+  bookings           bookings[]
+  seats              seats[]
+}
+
+model passengers {
+  passenger_id    Int      @id @default(autoincrement())
+  full_name       String
+  date_of_birth   DateTime
+  passport_number String
+  nationality     String
+}
+
+model bookings {
+  booking_id   Int      @id @default(autoincrement())
+  user_id      Int
+  flight_id    Int
+  booking_date DateTime
+  status       String
+  user         users    @relation(fields: [user_id], references: [user_id])
+  flight       flights  @relation(fields: [flight_id], references: [flight_id])
+  tickets      tickets[]
+  payments     payments[]
+}
+
+model airlines {
+  airline_id Int      @id @default(autoincrement())
+  name       String
+  country    String
+  flights    flights[]
+}
+
+model seats {
+  seat_id      Int      @id @default(autoincrement())
+  flight_id    Int
+  seat_number  String
+  class        String
+  is_available Boolean
+  flight       flights  @relation(fields: [flight_id], references: [flight_id])
+}
+
+model payments {
+  payment_id     Int      @id @default(autoincrement())
+  booking_id     Int
+  amount         Float
+  payment_date   DateTime
+  payment_method String
+  booking        bookings @relation(fields: [booking_id], references: [booking_id])
+}
+
+model tickets {
+  ticket_id      Int      @id @default(autoincrement())
+  transport_no   String
+  departure_date DateTime
+  origin         String
+  arrival_date   DateTime
+  destination    String
+  stops          Int
+  passenger_type String
+  total_price    Int
+  user_id        Int?
+  airline        String
+  booking_id     Int
+  seat_number    String
+  gate           String
+  boarding_time  DateTime
+  booking        bookings @relation(fields: [booking_id], references: [booking_id])
+  user           users?   @relation(fields: [user_id], references: [user_id])
+}

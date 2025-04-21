@@ -1,14 +1,6 @@
-const { Client } = require("pg");
+const { createClient } = require("@supabase/supabase-js");
+const config = require("./config");
 
-//Use host: "postgres" when running with Docker
-const client = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "postgres",
-  password: "123456789",
-  port: 5432,
-});
+const supabase = createClient(config.supabase.url, config.supabase.apiKey);
 
-client.connect();
-
-module.exports = client;
+module.exports = supabase;

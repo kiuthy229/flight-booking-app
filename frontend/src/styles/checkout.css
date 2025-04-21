@@ -1,0 +1,151 @@
+/* General styles for the checkout section */
+.checkout {
+  padding: 2rem 0;
+  background-color: #f9f9f9;
+}
+
+.checkout__title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.checkout__form {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkout__form input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.checkout__form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.checkout__summary {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkout__details {
+  margin-bottom: 1.5rem;
+}
+
+.checkout__details p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.checkout__details span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.checkout__options {
+  margin-top: 1.5rem;
+}
+
+.checkout__options h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.checkout__options label {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.payment__options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payment__options label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.checkout__btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.checkout__btn:hover {
+  background-color: #0056b3;
+}
+
+.split-form {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+}
+
+.split-form label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.split-form .StripeElement {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.split-form .StripeElement--focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.split-form .StripeElement--invalid {
+  border-color: #dc3545;
+}
+
+.split-form button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.split-form button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.725rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+}

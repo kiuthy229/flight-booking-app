@@ -1,10 +1,12 @@
 "use strict";
 
-const userData = require("../data/users");
+const supabase = require("../connection.js");
 
 const getUsers = async (req, res) => {
   try {
-    await userData.getUsers(req, res);
+    let { data, error } = await supabase.from('users').select('*');
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -12,7 +14,9 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    await userData.getUserById(req, res);
+    let { data, error } = await supabase.from('users').select('*').eq('user_id', req.params.id);
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -20,7 +24,9 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    await userData.createUser(req, res);
+    const { data, error } = await supabase.from('users').insert([req.body]);
+    if (error) throw error;
+    res.status(201).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -28,7 +34,14 @@ const createUser = async (req, res) => {
 
 const loginToUserAccount = async (req, res) => {
   try {
-    await userData.loginToUserAccount(req, res);
+    const { email, password } = req.body;
+    let { data, error } = await supabase.from('users').select('*').eq('email', email).eq('password', password);
+    if (error) throw error;
+    if (data.length === 0) {
+      res.status(401).send("Invalid credentials");
+    } else {
+      res.status(200).json(data[0]);
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -36,7 +49,10 @@ const loginToUserAccount = async (req, res) => {
 
 const updateUserPassword = async (req, res) => {
   try {
-    await userData.updateUserPassword(req, res);
+    const { user_id, newPassword } = req.body;
+    const { data, error } = await supabase.from('users').update({ password: newPassword }).eq('user_id', user_id);
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }

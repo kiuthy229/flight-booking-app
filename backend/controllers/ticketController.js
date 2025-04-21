@@ -1,10 +1,12 @@
 "use strict";
 
-const ticketData = require("../data/tickets");
+const supabase = require("../connection.js");
 
 const getTickets = async (req, res) => {
   try {
-    await ticketData.getTickets(req, res);
+    let { data, error } = await supabase.from('tickets').select('*');
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -12,7 +14,9 @@ const getTickets = async (req, res) => {
 
 const getTicketById = async (req, res) => {
   try {
-    await ticketData.getTicketById(req, res);
+    let { data, error } = await supabase.from('tickets').select('*').eq('ticket_id', req.params.id);
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -20,7 +24,9 @@ const getTicketById = async (req, res) => {
 
 const createTicket = async (req, res) => {
   try {
-    await ticketData.createTicket(req, res);
+    const { data, error } = await supabase.from('tickets').insert([req.body]);
+    if (error) throw error;
+    res.status(201).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -28,7 +34,9 @@ const createTicket = async (req, res) => {
 
 const buyTicket = async (req, res) => {
   try {
-    await ticketData.buyTicket(req, res);
+    const { data, error } = await supabase.from('tickets').update(req.body).eq('ticket_id', req.params.id);
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -38,5 +46,5 @@ module.exports = {
   getTickets,
   getTicketById,
   createTicket,
-  buyTicket
+  buyTicket,
 };

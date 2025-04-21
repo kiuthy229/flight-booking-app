@@ -8,29 +8,21 @@ const {
   PORT,
   HOST,
   HOST_URL,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_DATABASE,
-  POSTGRES_SERVER,
+  SUPABASE_URL,
+  SUPABASE_API_KEY,
 } = process.env;
-
-const sqlEncrypt = process.env.ENCRYPT === "true";
 
 assert(PORT, "PORT is required");
 assert(HOST, "HOST is required");
+assert(SUPABASE_URL, "SUPABASE_URL is required");
+assert(SUPABASE_API_KEY, "SUPABASE_API_KEY is required");
 
 module.exports = {
   port: PORT,
   host: HOST,
   url: HOST_URL,
-  sql: {
-    server: POSTGRES_SERVER,
-    database: POSTGRES_DATABASE,
-    user: POSTGRES_USER,
-    password: POSTGRES_PASSWORD,
-    options: {
-        encrypt:sqlEncrypt,
-        enableArithAbort:true
-    }
+  supabase: {
+    url: SUPABASE_URL,
+    apiKey: SUPABASE_API_KEY,
   },
 };
