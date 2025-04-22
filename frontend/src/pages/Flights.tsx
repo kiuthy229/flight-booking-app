@@ -6,6 +6,7 @@ import { Row, Col, Container, Spinner } from 'reactstrap'
 import { useLocation } from 'react-router-dom'
 import { getFlightOffers } from '../utils/amadeusClient'
 import { Flight } from '../types/Flight'
+import FlightCard from '../components/FlightCard/FlightCard'
 
 const Flights: React.FC = () => {
   const location = useLocation()
@@ -80,54 +81,9 @@ const Flights: React.FC = () => {
               !isError &&
               flightOffers
                 ?.slice(0, visibleCount) // Show only the visible results
-                .map((offer: Flight, index: number) => (
+                .map((flight: Flight, index: number) => (
                   <Col lg="12" className="mb-4" key={index}>
-                    <div className="p-4 bg-gray-100 rounded-md shadow-sm">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <h3 className="text-lg font-semibold">
-                            {
-                              offer.itineraries[0].segments[0].departure
-                                .iataCode
-                            }{' '}
-                            to{' '}
-                            {
-                              offer.itineraries[0].segments.slice(-1)[0].arrival
-                                .iataCode
-                            }
-                          </h3>
-                          <p className="text-sm text-gray-600">
-                            Departure:{' '}
-                            {offer.itineraries[0].segments[0].departure.at}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Arrival:{' '}
-                            {
-                              offer.itineraries[0].segments.slice(-1)[0].arrival
-                                .at
-                            }
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Duration: {offer.itineraries[0].duration}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Stops: {offer.itineraries[0].segments.length - 1}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-lg font-bold text-indigo-600">
-                            {offer.price.grandTotal} {offer.price.currency}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Base Price: {offer.price.base}{' '}
-                            {offer.price.currency}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Seats Available: {offer.numberOfBookableSeats}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <FlightCard flight={flight} />
                   </Col>
                 ))}
           </Row>
@@ -136,7 +92,7 @@ const Flights: React.FC = () => {
             flightOffers &&
             visibleCount < flightOffers.length && (
               <div className="text-center mt-4">
-                <button className="btn btn-primary" onClick={handleLoadMore}>
+                <button className="btn primary__btn" onClick={handleLoadMore}>
                   Load More
                 </button>
               </div>

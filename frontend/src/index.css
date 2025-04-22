@@ -67,6 +67,8 @@ ul {
   border: none !important;
   border-radius: 50px !important;
   padding: 0.4rem 1.5rem !important;
+  color: #fff;
+  font-weight: 700 !important;
 }
 
 .primary__btn a {
@@ -77,11 +79,19 @@ ul {
 .primary__btn a:hover {
   color: inherit;
 }
+
 .secondary__btn {
   background: transparent !important;
   color: #0b2727 !important;
   border: none !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+  box-shadow: none;
+}
+
+.secondary__btn:hover {
+  box-shadow: none;
+  color: var(--heading-color);
+  opacity: 0.8;
 }
 
 .secondary__btn a {

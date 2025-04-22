@@ -1,84 +1,84 @@
-import React, { FC, ChangeEvent, FormEvent } from 'react';
-import './booking.css';
-import { Form, FormGroup, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
-import { Credentials, Tour } from '../../types/common';
+import React, { FC, ChangeEvent, FormEvent } from 'react'
+import './booking.css'
+import {
+  Form,
+  FormGroup,
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Input,
+} from 'reactstrap'
+import { Credentials } from '../../types/common'
+import { Flight } from '../../types/Flight'
 
 interface BookingProps {
-  tour: Tour;
-  avgRating: number;
-  credentials: Credentials;
-  setCredentials: React.Dispatch<React.SetStateAction<Credentials>>;
-  handleBookNow: (e: FormEvent) => void;
+  flight: Flight
+  credentials: Credentials
+  setCredentials: React.Dispatch<React.SetStateAction<Credentials>>
+  handleBookNow: (e: FormEvent) => void
 }
 
 const Booking: FC<BookingProps> = ({
-  tour,
-  avgRating,
+  flight,
   credentials,
   setCredentials,
   handleBookNow,
 }) => {
-  const { price, reviews } = tour;
+  const { price } = flight
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }))
+  }
 
-  const serviceFee = 10;
-  const totalAmount =
-    Number(price) * Number(credentials.guestSize) + Number(serviceFee);
+  const totalAmount = Number(price.total) * Number(credentials.guestSize)
 
   return (
-    <div className='booking'>
-      <div className='booking__top d-flex align-items-center justify-content-between'>
+    <div className="booking">
+      <div className="booking__top d-flex align-items-center justify-content-between">
         <h3>
-          ${price} <span>/per person</span>
+          {price.currency} {Number(price.total)} <span>/per person</span>
         </h3>
-        <span className='tour__rating d-flex align-items-center'>
-          <i className='ri-star-s-fill'></i>
-          {avgRating === 0 ? null : avgRating} ({reviews?.length})
-        </span>
       </div>
 
       {/* Booking form */}
-      <div className='booking__form'>
+      <div className="booking__form">
         <h5>Information</h5>
-        <Form className='booking__info-form' onSubmit={handleBookNow}>
+        <Form className="booking__info-form" onSubmit={handleBookNow}>
           <FormGroup>
             <input
-              type='text'
-              placeholder='Full name'
-              id='fullName'
+              type="text"
+              placeholder="Full name"
+              id="fullName"
               required
               onChange={handleChange}
             />
           </FormGroup>
           <FormGroup>
             <input
-              type='number'
-              placeholder='Phone'
-              id='phone'
+              type="number"
+              placeholder="Phone"
+              id="phone"
               required
               onChange={handleChange}
             />
           </FormGroup>
           <FormGroup>
-            <input
-              type='date'
-              placeholder=''
+            <Input
+              type="date"
+              placeholder=""
               defaultValue={new Date().toISOString().split('T')[0]}
-              id='bookAt'
+              id="bookAt"
               required
               onChange={handleChange}
             />
           </FormGroup>
           <FormGroup>
-            <input
-              type='number'
-              placeholder='Guests'
-              id='guestSize'
-              min='1'
+            <Input
+              type="number"
+              placeholder="Guests"
+              id="guestSize"
+              min="1"
+              value={credentials.guestSize}
               required
               onChange={handleChange}
             />
@@ -87,31 +87,43 @@ const Booking: FC<BookingProps> = ({
       </div>
 
       {/* Booking Bottom */}
-      <div className='booking__bottom'>
+      <div className="booking__bottom">
         <ListGroup>
-          <ListGroupItem className='border-0 px-0'>
-            <h5 className='d-flex align-items-center gap-1'>
-              ${price} <i className='ri-close-line'></i>
+          <ListGroupItem className="border-0 px-0">
+            <h5 className="d-flex align-items-center gap-1">
+              {price.total} <i className="ri-close-line"></i>
               <span>1 person</span>
             </h5>
-            <span>${price}</span>
+            <span>
+              {price.currency} {price.grandTotal}
+            </span>
           </ListGroupItem>
-          <ListGroupItem className='border-0 px-0'>
+          <ListGroupItem className="border-0 px-0">
+            <h5>Supplier</h5>
+            <span>
+              {price.currency} {price.fees[0].amount}
+            </span>
+          </ListGroupItem>
+          <ListGroupItem className="border-0 px-0">
             <h5>Service charge</h5>
-            <span> ${serviceFee}</span>
+            <span>
+              {price.currency} {price.fees[1].amount}
+            </span>
           </ListGroupItem>
-          <ListGroupItem className='border-0 px-0 total'>
+          <ListGroupItem className="border-0 px-0 total">
             <h5>Total</h5>
-            <span> ${totalAmount}</span>
+            <span>
+              {price.currency} {totalAmount}
+            </span>
           </ListGroupItem>
         </ListGroup>
 
-        <Button className='btn primary__btn w-100 mt-4' onClick={handleBookNow}>
+        <Button className="btn primary__btn w-100 mt-4" onClick={handleBookNow}>
           Book Now
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Booking;
+export default Booking

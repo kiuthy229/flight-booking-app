@@ -1,0 +1,22 @@
+.flight-details {
+  background-color: #f7fafc; /* Light gray background */
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flight-details h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.flight-details p {
+  font-size: 0.875rem;
+  color: #4a5568; /* Gray text */
+}
+
+.flight-details .price {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #5a67d8; /* Indigo */
+}

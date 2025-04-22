@@ -25,9 +25,10 @@
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 2rem;
   border-radius: 5px;
+  gap: 1rem;
 }
 
 .newsletter__input input {

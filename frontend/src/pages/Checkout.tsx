@@ -13,6 +13,7 @@ import {
 import { useMutation } from 'react-query'
 import '../styles/checkout.css'
 import { post } from '../utils/api'
+import { Flight } from '../types/Flight'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!)
 
@@ -132,13 +133,8 @@ const SplitForm: React.FC<SplitFormProps> = ({ onPaymentMethodCreated }) => {
 
 const Checkout: React.FC = () => {
   const location = useLocation()
-  const { tourId, title, price, guestSize, date } = location.state as {
-    tourId: string
-    title: string
-    price: number
-    guestSize: number
-    date: string
-  }
+  const { flight } = location.state as { flight: Flight }
+
   const [paymentMethodId, setPaymentMethodId] = useState<string | null>(null)
   const navigate = useNavigate()
   const token = localStorage.getItem('token') || ''
@@ -156,8 +152,8 @@ const Checkout: React.FC = () => {
         '/payments',
         {
           userId,
-          bookingId: tourId,
-          amount: price * guestSize + 10,
+          amount: flight?.price?.total,
+          flightId: flight?.id,
           currency: 'usd',
           paymentMethodId,
         },
@@ -193,16 +189,46 @@ const Checkout: React.FC = () => {
             <div className="booking__summary">
               <h5>Booking Summary</h5>
               <p>
-                <strong>Tour:</strong> {title}
+                <strong>Flight:</strong>{' '}
+                {flight?.itineraries[0].segments[0].departure.iataCode} to{' '}
+                {flight?.itineraries[0].segments.slice(-1)[0].arrival.iataCode}
               </p>
               <p>
-                <strong>Travelers:</strong> {guestSize}
+                <strong>Passenger name:</strong> {''}
               </p>
               <p>
-                <strong>Booking Date:</strong> {date}
+                <strong>Departure Date:</strong>{' '}
+                {flight?.itineraries[0].segments[0].departure.at.split('T')[0]}{' '}
+                {flight?.itineraries[0].segments[0].departure.at.split('T')[1]}
               </p>
               <p>
-                <strong>Total Price:</strong> ${price * guestSize + 10}
+                <strong>Terminal:</strong>{' '}
+                {flight?.itineraries[0].segments[0].departure.terminal}
+              </p>
+              <p>
+                <strong>Arrival:</strong>{' '}
+                {
+                  flight?.itineraries[0].segments
+                    .slice(-1)[0]
+                    .arrival.at.split('T')[0]
+                }{' '}
+                {
+                  flight?.itineraries[0].segments
+                    .slice(-1)[0]
+                    .arrival.at.split('T')[1]
+                }
+              </p>
+              <p>
+                <strong>Duration:</strong>
+                {flight?.itineraries[0].duration}
+              </p>
+              <p>
+                <strong>Stops:</strong>
+                {flight?.itineraries[0].segments.length - 1}
+              </p>
+              <p>
+                <strong>Total Price:</strong> {flight?.price.currency}{' '}
+                {flight?.price.total}
               </p>
             </div>
             <Elements stripe={stripePromise}>

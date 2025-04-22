@@ -329,7 +329,7 @@ const SearchBar: React.FC = () => {
             </FormGroup>
 
             <FormGroup className="d-flex gap-3 form__group">
-              <div className="d-flex gap-3 align-self-start justify-self-start">
+              <div className="d-flex gap-3 align-items-center justify-content-start">
                 <Input
                   type="checkbox"
                   id="two-way-trip"
@@ -337,26 +337,24 @@ const SearchBar: React.FC = () => {
                   onChange={(e) => setIsTwoWayTrip(e.target.checked)}
                 />
                 <label htmlFor="two-way-trip" className="checkbox-label">
-                  Two-way trip
+                  <h6>Two-way trip</h6>
                 </label>
               </div>
-              <div className="d-flex align-items-center gap-3">
+              <div className="way-trip__input d-flex align-items-center gap-3">
                 {isTwoWayTrip && (
-                  <>
-                    <Input
-                      type="date"
-                      innerRef={arrivalDateRef}
-                      min={returnDateMin}
-                      disabled={!departureDateRef.current?.value}
-                    />
-                  </>
+                  <Input
+                    type="date"
+                    innerRef={arrivalDateRef}
+                    min={returnDateMin}
+                    disabled={!departureDateRef.current?.value}
+                  />
                 )}
               </div>
             </FormGroup>
 
             <FormGroup className="d-flex gap-3 form__group">
               <h6>Class</h6>
-              <div className="d-flex align-items-center gap-3">
+              <div className="d-flex align-items-center gap-3 mt-1 mb-1">
                 <i className="ri-flight-takeoff-line"></i>
                 <Input
                   type="select"

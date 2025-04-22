@@ -1,6 +1,6 @@
 import React from 'react'
 import './newsletter.css'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Input } from 'reactstrap'
 
 const Newsletter: React.FC = () => {
   return (
@@ -11,9 +11,9 @@ const Newsletter: React.FC = () => {
             <div className="newsletter__content">
               <h2>Stay Updated with Our Latest Deals</h2>
               <div className="newsletter__input">
-                <input type="email" placeholder="Enter your email" />
+                <Input type="email" placeholder="Enter your email" />
                 <button className="newsletter__btn btn" type="button">
-                  Join Now
+                  Subscribe
                 </button>
               </div>
               <p>
