@@ -23,12 +23,8 @@ const navLinks: NavLinkItem[] = [
     display: 'Home',
   },
   {
-    path: '/about',
-    display: 'About',
-  },
-  {
-    path: '/tickets',
-    display: 'Tickets',
+    path: '/flights',
+    display: 'Browse Flights',
   },
 ]
 
@@ -82,7 +78,7 @@ const Header: FC = () => {
               <img src={logo} alt="Logo" />
             </div>
             <div className="d-none d-md-flex navigation">
-              <ul className="menu d-flex align-items-center gap-5">
+              <ul className="menu d-flex align-items-center gap-3">
                 {navLinks.map((item, index) => (
                   <li className="nav__item" key={index}>
                     <NavLink

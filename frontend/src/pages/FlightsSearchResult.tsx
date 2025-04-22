@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import { getFlightOffers } from '../utils/amadeusClient'
 import { Flight } from '../types/Flight'
 
-const Flights: React.FC = () => {
+const FlightsSearchResult: React.FC = () => {
   const location = useLocation()
   const [flightOffers, setFlightOffers] = useState<Flight[] | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -59,8 +59,6 @@ const Flights: React.FC = () => {
 
     fetchFlights()
   }, [location.search])
-
-  console.log('Flight offers:', flightOffers)
 
   return (
     <>
@@ -126,4 +124,4 @@ const Flights: React.FC = () => {
   )
 }
 
-export default Flights
+export default FlightsSearchResult

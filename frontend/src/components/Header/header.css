@@ -21,11 +21,21 @@
   margin-bottom: 0;
 }
 
+.nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
+}
+
 .nav__item a {
   text-decoration: none;
   color: var(--heading-color);
   font-weight: 500;
   font-size: 1.1rem;
+  flex-wrap: nowrap;
 }
 
 .nav__item a:hover {
